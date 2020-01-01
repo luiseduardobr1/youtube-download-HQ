@@ -19,3 +19,4 @@ yt = YouTube(video)
 After that, create the directory **C:\\videos\\**, because that's where the files will be saved. This can be changed in the code. If subtitles are available, they will be downloaded and saved in the same folder. Don't forget to put **youtubeHQ.py** and **ffmpeg.exe** in the same folder. 
 
 # Screenshot
+![Output files](https://user-images.githubusercontent.com/56649205/71645595-63040080-2cb9-11ea-85be-08f04d7e2c6b.PNG)
