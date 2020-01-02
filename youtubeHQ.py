@@ -34,7 +34,7 @@ if len(minha_lista) > 0:
         idioma=string.split('"')[3]
         nome_idioma=string.split('"')[1]
         caption = yt.captions.get_by_language_code(idioma)
-        text_file = open("C:\\videos\\"+diretorio+"\\"+nome_idioma+"-"+".srt", "w",encoding="utf-8")
+        text_file = open("C:\\videos\\"+diretorio+"\\"+nome_idioma+".srt", "w",encoding="utf-8")
         text_file.write(caption.generate_srt_captions())
         text_file.close()
 else:
