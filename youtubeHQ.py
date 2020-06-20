@@ -13,13 +13,13 @@ dirname = str(titulo) + str(author)
 remove_punctuation_map = dict((ord(char), None) for char in string.punctuation)
 diretorio = dirname.translate(remove_punctuation_map)
 
-# Create a folder in C:\videos\
+# Create a folder
 try:
     os.mkdir(diretorio)
 except OSError:
     print ("Failed to create directory")
 
-# Aviso baixando
+# Downloading text
 print('Baixando...')
 print('Aguarde alguns minutos')
 
