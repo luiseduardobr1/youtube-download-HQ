@@ -1,41 +1,40 @@
 from pytube import YouTube
 import os
+import string
 
 # Get video link
-video = 'https://www.youtube.com/watch?v=0xY06PT5JDE'
-yt = YouTube(video)
+VIDEO = 'https://www.youtube.com/watch?v=o2IJaj3nUmU'
+yt = YouTube(VIDEO)
 
 # Title
-titulo=yt.title
-diretorio=titulo.split(' ', 1)[0]
+author = yt.author
+titulo = yt.title
+dirname = str(titulo) + str(author)
+remove_punctuation_map = dict((ord(char), None) for char in string.punctuation)
+diretorio = dirname.translate(remove_punctuation_map)
 
 # Create a folder in C:\videos\
 try:
-    os.mkdir("C:\\videos\\"+diretorio)
+    os.mkdir(diretorio)
 except OSError:
     print ("Failed to create directory")
 
-# Video and Audio - Download
-audiotitulo = yt.streams.filter(only_audio=True).first().download('C:\\videos\\'+diretorio,filename=diretorio+'audio')
-videotitulo = yt.streams.filter(adaptive=True).first().download('C:\\videos\\'+diretorio,filename=diretorio+'video')
+# Aviso baixando
+print('Baixando...')
+print('Aguarde alguns minutos')
 
+# Video and Audio - Download
+audiotitulo = yt.streams.filter(only_audio=True).first().download(diretorio, filename = diretorio + '_audio')
+videotitulo = yt.streams.filter(adaptive=True).first().download(diretorio, filename = diretorio + '_video')
 
 # Merge Video and Audio
-cmd='cd C:\\videos & ffmpeg -i C:\\videos\\'+diretorio+'\\'+diretorio+'video'+os.path.splitext(videotitulo)[1]+' -i C:\\videos\\'+diretorio+'\\'+diretorio+'audio'+os.path.splitext(audiotitulo)[1]+' -c copy C:\\videos\\'+diretorio+'\\'+titulo.split(' ', 1)[0]+'.mkv'
+cmd = f'ffmpeg -i "{os.path.normpath(videotitulo)}" -i "{os.path.normpath(audiotitulo)}" -c copy "{os.path.join(os.getcwd(), diretorio, "resultant_video.mp4")}" -v quiet'
 os.system(cmd)
-print(cmd)
 
 # Subtitles - Download
-minha_lista = yt.captions.all()
-#print('\n'.join('v{}: {}'.format(v, i) for v, i in enumerate(minha_lista))) #---- Available subtitles
-if len(minha_lista) > 0:
-    for contador in range(0,len(minha_lista)):
-        string=str(minha_lista[contador])
-        idioma=string.split('"')[3]
-        nome_idioma=string.split('"')[1]
-        caption = yt.captions.get_by_language_code(idioma)
-        text_file = open("C:\\videos\\"+diretorio+"\\"+nome_idioma+".srt", "w",encoding="utf-8")
-        text_file.write(caption.generate_srt_captions())
-        text_file.close()
-else:
-    print("Subtitles not found")
+my_captions = yt.captions
+if len(my_captions) > 0:
+    for subtitle in my_captions:
+        subtitle_name = str(subtitle).split('"')[1]
+        with open(diretorio + "\\" + subtitle_name + ".srt", "w", encoding="utf-8") as f:
+            f.write(subtitle.generate_srt_captions())
