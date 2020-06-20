@@ -4,11 +4,9 @@ Download the maximum quality resolution videos on Youtube and all the captions a
 # Why to use it
 This code use [pytube library](https://python-pytube.readthedocs.io/en/latest/) to download youtube videos and their captions. However, there is a [youtube limitation](https://github.com/nficano/pytube) to download high quality video and audio codec's together in same file, then it's only possible to download audio and video (above 720p) separately. In this sense, this code can download both maximum quality video and audio files, merge them with [ffmpeg](https://www.ffmpeg.org/documentation.html) and get all captions available. The output files are: merged file (in *.mkv*), audio file, video file and the captions (in *.srt*). 
 
-# What is necessary to install
-First, it's necessary to install **pytube**. If you are using [Jupyter Notebook](https://jupyter.org/), just paste this code in cell:
+# Requirements
 ```
-import sys
-!{sys.executable} -m pip install pytube
+pip install pytube3
 ```
 You may need to install [K-Lite Mega Codec Pack](https://k-lite-mega-codec-pack.br.uptodown.com/windows) too. 
 
