@@ -14,7 +14,6 @@ You may need to install [K-Lite Mega Codec Pack](https://k-lite-mega-codec-pack.
 # How to use
 In **youtubeHQ.py**, get the youtube video link and paste on:
 ```Python
-# Get video link
 VIDEO = 'https://www.youtube.com/watch?v=0xY06PT5JDE'
 ```
 
