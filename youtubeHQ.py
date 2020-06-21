@@ -45,6 +45,9 @@ if len(my_captions) > 0:
         subtitle_name = str(subtitle).split('"')[1]
         with open(diretorio + "\\" + subtitle_name + ".srt", "w", encoding="utf-8") as f:
             f.write(subtitle.generate_srt_captions())
+<<<<<<< HEAD
 
 # End
 print('Finalizado')
+=======
+>>>>>>> 98945982617dee82040bce82c5d5b3a3fdfc9cd8
