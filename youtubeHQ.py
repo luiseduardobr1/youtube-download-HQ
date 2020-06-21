@@ -1,9 +1,16 @@
 from pytube import YouTube
 import os
 import string
+import sys
+
+
+if len(sys.argv) > 1:
+    VIDEO = sys.argv[1]
+else:
+    # Default
+    VIDEO = 'https://www.youtube.com/watch?v=o2IJaj3nUmU'
 
 # Get video link
-VIDEO = 'https://www.youtube.com/watch?v=o2IJaj3nUmU'
 yt = YouTube(VIDEO)
 
 # Title
@@ -13,14 +20,14 @@ dirname = str(titulo) + str(author)
 remove_punctuation_map = dict((ord(char), None) for char in string.punctuation)
 diretorio = dirname.translate(remove_punctuation_map)
 
-# Create a folder in C:\videos\
+# Create a folder
 try:
     os.mkdir(diretorio)
 except OSError:
     print ("Failed to create directory")
 
-# Aviso baixando
-print('Baixando...')
+# Downloading text
+print(f'Baixando {str(titulo)} do canal {str(author)} ...')
 print('Aguarde alguns minutos')
 
 # Video and Audio - Download
@@ -38,3 +45,6 @@ if len(my_captions) > 0:
         subtitle_name = str(subtitle).split('"')[1]
         with open(diretorio + "\\" + subtitle_name + ".srt", "w", encoding="utf-8") as f:
             f.write(subtitle.generate_srt_captions())
+
+# End
+print('Finalizado')
