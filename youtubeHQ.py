@@ -3,7 +3,6 @@ import os
 import string
 import sys
 
-
 if len(sys.argv) > 1:
     VIDEO = sys.argv[1]
 else:
